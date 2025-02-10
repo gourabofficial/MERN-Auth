@@ -1,11 +1,10 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import bycrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import "dotenv/config"; 
 import connectDB from "./config/mongodb.js";
 import authRouts from './routs/authRouts.js';
+import userRouter from "./routs/userRouts.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -23,6 +22,7 @@ app.get("/", (req, res) => {
 })
 
 app.use('/api/auth', authRouts);
+app.use('/api/user',userRouter);
 
 
 
