@@ -19,7 +19,7 @@ app.use(cookieParser());
 //API Endpoints
 
 app.get("/", (req, res) => {
-  res.send("Hari Bol")
+  res.send("")
 })
 
 app.use('/api/auth', authRouts);
