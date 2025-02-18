@@ -29,32 +29,31 @@ app.use((req, res, next) => {
 
 
 
-
-
-
-
-// CORS middleware
 app.use(cors({
   origin: function (origin, callback) {
-    console.log("Incoming request from origin:", origin || "Direct browser visit (No Origin)"); 
-
-    // Allow requests with no origin (e.g., same-origin requests, browser navigation)
-    if (!origin) {
+    if (!origin || allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-
-    // Allow requests from allowed origins
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-
-    // Reject all other origins
-    return callback(new Error('Not allowed by CORS'));
+    return callback(new Error("Not allowed by CORS"));
   },
-  credentials: true
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://gourab-authentication.onrender.com");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
+  
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+  
+  next();
+});
 
 
 
