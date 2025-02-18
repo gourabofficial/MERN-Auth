@@ -19,6 +19,10 @@ app.use(cookieParser());
 //API Endpoints
 
 app.get("/", (req, res) => {
+  res.send("Hare Krishna");
+});
+
+app.get("/", (req, res) => {
   res.send("")
 })
 
