@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 export const Login = () => {
   const navigate = useNavigate();
 
-  const { backendUrl, setIsLoggedin,getUserData } = useContext(AppContent);
+  const { backendUrl, setIsLoggedin, getUserData } = useContext(AppContent);
 
   const [state, setState] = useState("Sign Up");
   const [name, setName] = useState("");
@@ -52,13 +52,12 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex  items-center justify-center min-h-screen px-6 sm:px-0 bg-gradient-to-br from-blue-200 to-purple-400">
+    <div className="flex items-center justify-center min-h-screen px-6 sm:px-0 bg-gradient-to-br from-blue-200 to-purple-400">
       <img
         onClick={() => navigate("/")}
         src={assets.logo}
         alt=""
-        className="absolute left-5 sm:left-20
-      top-5 w-28 sm:w-32 cursor-pointer"
+        className="absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer"
       />
 
       <div className="bg-slate-900 p-10 rounded-lg shadow-lg w-full sm:w-96 text-indigo-300 text-sm">
@@ -66,7 +65,6 @@ export const Login = () => {
           {state === "Sign Up" ? "Create Account" : "Login"}
         </h2>
         <p className="text-center text-sm mb-6">
-          {" "}
           {state === "Sign Up" ? "Create Your Account" : "Login Your Account"}
         </p>
 
@@ -116,8 +114,7 @@ export const Login = () => {
             Forgot password?
           </p>
           <button
-            className="w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500
-           to-indigo-900 text-white font-medium"
+            className="w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-medium"
           >
             {state}
           </button>

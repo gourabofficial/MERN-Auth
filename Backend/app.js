@@ -24,9 +24,9 @@ app.use(express.json());
 
 app.use(cors({
   origin: (origin, callback) => {
-    console.log("Incoming request from origin:", origin); // Log the origin
+    console.log("Incoming request from origin:", origin); 
 
-    // Allow requests with no origin (like same-origin requests)
+    
     if (!origin) return callback(null, true);
 
     if (allowedOrigins.includes(origin)) {
@@ -35,7 +35,7 @@ app.use(cors({
       callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true, // Ensures cookies are sent
+  credentials: true,
 }));
 
 app.use(cookieParser());
