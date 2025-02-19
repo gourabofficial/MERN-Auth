@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import "dotenv/config"; 
+import dotenv from "dotenv";
 import connectDB from "./config/mongodb.js";
 import authRouts from './routs/authRouts.js';
 import userRouter from "./routs/userRouts.js";
@@ -9,6 +10,9 @@ import userRouter from "./routs/userRouts.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
 connectDB();
+dotenv.config();
+
+
 
 const allowedOrigins = [
   process.env.FRONTEND_URL,  
@@ -19,21 +23,19 @@ const allowedOrigins = [
 app.use(express.json());
 
 app.use(cors({
-  origin: function (origin, callback) {
+  origin: (origin, callback) => {
     console.log("Incoming request from origin:", origin); // Log the origin
-    // Allow requests with no origin (e.g., same-origin requests)
-    if (!origin) {
-      callback(null, true);
-      return;
-    }
-    // Allow requests from allowed origins
+
+    // Allow requests with no origin (like same-origin requests)
+    if (!origin) return callback(null, true);
+
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true
+  credentials: true, // Ensures cookies are sent
 }));
 
 app.use(cookieParser());
